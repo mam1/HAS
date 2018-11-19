@@ -4,7 +4,22 @@
 * Mosquitto MQTT message broker broker implemented on a BeagleBbone Black
 * ESP8266 based sensor and control modules
 ### BeagleBone Black rev C
-BeagleBone Black rev C Running Debian jessi
+BeagleBone Black is a low-cost, community-supported development platform for developers and hobbyists. Boot Linux in under 10 seconds and get started on development in less than 5 minutes with just a single USB cable.
+
+Hardware
+* Processor: AM335x 1GHz ARM® Cortex-A8
+* 512MB DDR3 RAM
+* 4GB 8-bit eMMC on-board flash storage
+* 3D graphics accelerator
+* NEON floating-point accelerator
+* 2x PRU 32-bit microcontrollers
+
+Connectivity
+* USB client for power & communications
+* USB host
+* Ethernet
+* HDMI
+
 #### Mosquitto
 Install Eclipse Mosquitto (https://projects.eclipse.org/projects/technology.mosquitto)
 
