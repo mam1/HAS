@@ -3,7 +3,7 @@
 ### Overview
 * Mosquitto MQTT message broker broker implemented on a BeagleBbone Black
 * ESP8266 based sensor and control modules
-### BeagleBone Black
+### BeagleBone Black rev C
 BeagleBone Black rev C Running Debian jessi
 #### Mosquitto
 Install Eclipse Mosquitto (https://projects.eclipse.org/projects/technology.mosquitto)
@@ -17,5 +17,8 @@ As well as accepting connections from MQTT client applications, Mosquitto has a 
 ##### daemon
 ##### editor
 
-### ESP8266
+### ESP8266 / nodeMCU
+The ESP8266 is a low-cost Wi-Fi microchip with full TCP/IP stack and microcontroller capability produced by Shanghai-based Chinese manufacturer Espressif Systems. https://www.espressif.com/en/products/hardware/esp8266ex/overview
+
+NodeMCU is an open source IoT platform. It includes firmware which runs on the ESP8266 Wi-Fi SoC from Espressif Systems, and hardware which is based on the ESP-12 module. The term "NodeMCU" by default refers to the firmware rather than the development kits. The firmware uses the Lua scripting language. https://nodemcu.readthedocs.io/en/master/
 
