@@ -2,9 +2,10 @@
 ## MQTT based Home Automation System
 ### Overview
 * Mosquitto MQTT message broker broker implemented on a BeagleBbone Black
+* Schedule editor and control daemon written in C running on the BeagleBone
 * ESP8266 based sensor and control modules
-### BeagleBone Black rev C
-BeagleBone Black is a low-cost, community-supported development platform for developers and hobbyists. Boot Linux in under 10 seconds and get started on development in less than 5 minutes with just a single USB cable.
+### BeagleBone Black rev C 
+BeagleBone Black is a low-cost, community-supported development platform for developers and hobbyists. It will boot Linux in under 10 seconds. http://beagleboard.org/black
 
 Hardware
 * Processor: AM335x 1GHz ARM® Cortex-A8
