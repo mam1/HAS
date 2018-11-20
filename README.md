@@ -22,7 +22,7 @@ Connectivity
 * HDMI
 
 #### Mosquitto
-Install Eclipse Mosquitto (https://projects.eclipse.org/projects/technology.mosquitto)
+Install Eclipse Mosquitto (https://projects.eclipse.org/projects/technology.mosquitto) https://www.evernote.com/shard/s416/sh/d6f2812d-600e-4d2f-9201-cc0fb1577bcb/b69ec1afc266e85f5f0e6dfe05b6e077
 
 Eclipse Mosquitto provides a lightweight server implementation of the MQTT protocol that is suitable for all situations from full power machines to embedded and low power machines. Sensors and actuators, which are often the sources and destinations of MQTT messages, can be very small and lacking in power. This also applies to the embedded machines to which they are connected, which is where Mosquitto could be run.
 
