@@ -38,3 +38,4 @@ The ESP8266 is a low-cost Wi-Fi microchip with full TCP/IP stack and microcontro
 
 NodeMCU is an open source IoT platform. It includes firmware which runs on the ESP8266 Wi-Fi SoC from Espressif Systems, and hardware which is based on the ESP-12 module. The term "NodeMCU" by default refers to the firmware rather than the development kits. The firmware uses the Lua scripting language. https://nodemcu.readthedocs.io/en/master/
 
+###Architecture 
