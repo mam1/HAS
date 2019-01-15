@@ -6,7 +6,7 @@
 # set directories
 system_BINARIES := ~/Git/HAS/bin
 code_DIRECTORY := $(working_DIRECTORY)
-program_INCLUDE_DIRS := /home/mam1/Git/HAS/c/headers/
+program_INCLUDE_DIRS := /home/mam1/Git/HAS/c/headers/  #/usr/include/linux/
 program_LIBRARY_DIRS := $~/Git/HAS/c/lib
 program_LIBRARIES := hellow
 

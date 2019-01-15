@@ -3,15 +3,15 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <stdio.h>
-#include <unistd.h>		//sleep
-#include <stdint.h>		//uint_8, uint_16, uint_32, etc.
-#include <ctype.h> 		//isalnum, tolower
+#include <unistd.h>	//sleep
+#include <stdint.h>	//uint_8, uint_16, uint_32, etc.
+#include <ctype.h> 	//isalnum, tolower
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
 
 // #include "hellow.h"
-#include "core.h"
+#include "HAScore.h"
 
 int main(int argc, char *argv[]){
 

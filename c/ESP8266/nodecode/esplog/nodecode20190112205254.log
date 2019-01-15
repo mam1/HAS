@@ -1,0 +1,53 @@
+2019-01-12 20:52:54.872:  w@(
+2019-01-12 20:52:54.899:   ets Jan  8 2013,rst cause:2, boot mode:(3,6)
+2019-01-12 20:52:54.900:  
+2019-01-12 20:52:54.909:  load 0x40100000, len 7188, room 16 
+2019-01-12 20:52:54.932:  tail 4
+2019-01-12 20:52:54.933:  chksum 0xee
+2019-01-12 20:52:54.933:  load 0x3ffe8408, len 24, room 4 
+2019-01-12 20:52:54.934:  tail 4
+2019-01-12 20:52:54.934:  chksum 0x67
+2019-01-12 20:52:54.934:  load 0x3ffe8420, len 3548, room 4 
+2019-01-12 20:52:54.971:  tail 8
+2019-01-12 20:52:54.971:  chksum 0x6a
+2019-01-12 20:52:54.971:  csum 0x6a[0;32mI (48) boot: ESP-IDF v3.1-dev-474-g02e405c 2nd stage bootloader[0m
+2019-01-12 20:52:54.973:  [0;32mI (48) boot: compile time 13:21:46[0m
+2019-01-12 20:52:54.974:  [0;32mI (48) qio_mode: Enabling default flash chip QIO[0m
+2019-01-12 20:52:54.975:  [0;32mI (56) boot: SPI Speed      : 40MHz[0m
+2019-01-12 20:52:55.004:  [0;32mI (63) boot: SPI Mode       : QIO[0m
+2019-01-12 20:52:55.005:  [0;32mI (69) boot: SPI Flash Size : 2MB[0m
+2019-01-12 20:52:55.006:  [0;32mI (75) boot: Partition Table:[0m
+2019-01-12 20:52:55.007:  [0;32mI (80) boot: ## Label            Usage          Type ST Offset   Length[0m
+2019-01-12 20:52:55.008:  [0;32mI (92) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+2019-01-12 20:52:55.039:  [0;32mI (103) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+2019-01-12 20:52:55.041:  [0;32mI (115) boot:  2 factory          factory app      00 00 00010000 000f0000[0m
+2019-01-12 20:52:55.042:  [0;32mI (126) boot: End of partition table[0m
+2019-01-12 20:52:55.055:  [0;32mI (133) esp_image: segment 0: paddr=0x00010010 vaddr=0x40210010 size=0x3e298 (254616) map[0m
+2019-01-12 20:52:55.179:  [0;32mI (252) esp_image: segment 1: paddr=0x0004e2b0 vaddr=0x3ffe8000 size=0x0053c (  1340) load[0m
+2019-01-12 20:52:55.181:  [0;32mI (253) esp_image: segment 2: paddr=0x0004e7f4 vaddr=0x3ffe853c size=0x0011c (   284) load[0m
+2019-01-12 20:52:55.183:  [0;32mI (264) esp_image: segment 3: paddr=0x0004e918 vaddr=0x40100000 size=0x06214 ( 25108) load[0m
+2019-01-12 20:52:55.209:  [0;32mI (287) boot: Loaded app from partition at offset 0x10000[0m
+2019-01-12 20:52:55.252:  [0;32mI (334) system_api: Base MAC address is not set, read default base MAC address from BLK0 of EFUSE[0m
+2019-01-12 20:52:55.267:  [0;32mI (344) system_api: Base MAC address is not set, read default base MAC address from BLK0 of EFUSE[0m
+2019-01-12 20:52:55.498:  [0;32mI (564) reset_reason: RTC reset 2 wakeup 0 store 0, reason is 2[0m
+2019-01-12 20:52:55.500:  SDK version:v3.1-dev-474-g02e405c
+2019-01-12 20:52:55.501:  HAS version 0.0 
+2019-01-12 20:52:55.502:  NVS initialized
+2019-01-12 20:52:55.502:  [0;32mI (574) nodecode: ESP_WIFI_MODE_STA[0m
+2019-01-12 20:52:55.511:  mode : sta(18:fe:34:a3:46:da)
+2019-01-12 20:52:55.512:  add if0
+2019-01-12 20:52:55.532:  [0;32mI (604) nodecode: wifi_init_sta finished.[0m
+2019-01-12 20:52:55.534:  [0;32mI (604) nodecode: connect to ap SSID:JF-Guest password:6789012345[0m
+2019-01-12 20:52:55.535:  starting to configure wifi
+2019-01-12 20:52:57.958:  scandone
+2019-01-12 20:52:57.962:  state: 0 -> 2 (b0)
+2019-01-12 20:52:57.966:  state: 2 -> 3 (0)
+2019-01-12 20:52:57.979:  state: 3 -> 5 (10)
+2019-01-12 20:52:57.980:  add 0
+2019-01-12 20:52:57.980:  aid 5
+2019-01-12 20:52:57.981:  pm open phy_2,type:2 0 0
+2019-01-12 20:52:57.981:  cnt 
+2019-01-12 20:53:02.049:  
+2019-01-12 20:53:02.054:  connected with JF-Guest, channel 1
+2019-01-12 20:53:47.080:  [0;32mI (52154) event: sta ip: 192.168.2.12, mask: 255.255.255.0, gw: 192.168.2.1[0m
+2019-01-12 20:53:47.081:  [0;32mI (52154) nodecode: got ip:192.168.2.12[0m
