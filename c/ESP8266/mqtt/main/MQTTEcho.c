@@ -23,6 +23,7 @@
 #include "esp_event_loop.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
+#include "esp_timer.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -40,17 +41,12 @@ const int CONNECTED_BIT = BIT0;
 
 #define MQTT_CLIENT_THREAD_NAME         "mqtt_client_thread"
 #define MQTT_CLIENT_THREAD_STACK_WORDS  4096
-#define MQTT_CLIENT_THREAD_PRIO         8
+#define MQTT_CLIENT_THREAD_PRIO         8 
 
-#define WIFI_THREAD_NAME         "wifi_thread"
-#define WIFI_THREAD_STACK_WORDS  4096
-#define WIFI_THREAD_PRIO         8
-
-#define SENSOR_THREAD_NAME         "mqtt_client_thread"
-#define SENSOR_THREAD_STACK_WORDS  4096
-#define SENSOR_THREAD_PRIO         8
-
-
+#define SENSOR_READ_THREAD_NAME         "sensor_read"
+#define SENSOR_READ_THREAD_STACK_WORDS  4096
+#define SENSOR_READ_THREAD_PRIO         8 
+#define SENSOR_READ_DELAY               10000000
 
 static const char *TAG = "example";
 
@@ -102,7 +98,7 @@ static void initialise_wifi(void)
 static void messageArrived(MessageData *data)
 {
     ESP_LOGI(TAG, "Message arrived[len:%u]: %.*s", \
-           data->message->payloadlen, data->message->payloadlen, (char *)data->message->payload);
+             data->message->payloadlen, data->message->payloadlen, (char *)data->message->payload);
 }
 
 static void mqtt_client_thread(void *pvParameters)
@@ -130,7 +126,7 @@ static void mqtt_client_thread(void *pvParameters)
              CONFIG_MQTT_SEND_BUFFER, CONFIG_MQTT_RECV_BUFFER,
              CONFIG_MQTT_SEND_CYCLE, CONFIG_MQTT_RECV_CYCLE);
 
-    MQTTPacket_connectData connectData = MQTTPacket_connectData_initializer;
+    MQTTPacket_connectData                  connectData = MQTTPacket_connectData_initializer;
 
     NetworkInit(&network);
 
@@ -178,7 +174,7 @@ static void mqtt_client_thread(void *pvParameters)
 
         ESP_LOGI(TAG, "MQTT Connected");
 
-#if defined(MQTT_TASK)
+ #if defined(MQTT_TASK)
 
         if ((rc = MQTTStartTask(&client)) != pdPASS) {
             ESP_LOGE(TAG, "Return code from start tasks is %d", rc);
@@ -186,7 +182,7 @@ static void mqtt_client_thread(void *pvParameters)
             ESP_LOGI(TAG, "Use MQTTStartTask");
         }
 
-#endif
+ #endif
 
         if ((rc = MQTTSubscribe(&client, CONFIG_MQTT_SUB_TOPIC, CONFIG_DEFAULT_MQTT_SUB_QOS, messageArrived)) != 0) {
             ESP_LOGE(TAG, "Return code from MQTT subscribe is %d", rc);
@@ -226,11 +222,53 @@ static void mqtt_client_thread(void *pvParameters)
     return;
 }
 
-void app_main(void)
-{
-    // Initialize NVS
-    esp_err_t ret = nvs_flash_init();
+// void sensor_publish(void *p) {
+//     int                 tempertature = 88;
+//     int                 humidity = 55;
+//     esp_err_t           ret;
 
+//     printf("%s\n", "setup for MQTT publish");
+//     initialise_wifi();
+//     printf("%s\n", "wifi initialized");
+
+//     ret = xTaskCreate(&sensor_publish,
+//                       "sensor_publish",
+//                       MQTT_CLIENT_THREAD_STACK_WORDS,
+//                       NULL,
+//                       MQTT_CLIENT_THREAD_PRIO,
+//                       NULL);
+
+//     if (ret != pdPASS)  {
+//         ESP_LOGE(TAG, "sensor_publish create client thread %s failed", MQTT_CLIENT_THREAD_NAME);
+//     }
+
+//     esp_wifi_deinit();
+//     printf("%s\n",  "wifi deinitalized" );
+//     printf("%s\n","sensor_publish thread going to kill itself");
+//     esp_err_t esp_wifi_deinit(void);
+//     vTaskDelete(NULL);
+//     return;
+// }
+
+static void read_sensor_cb(void *pvParameters) {
+
+    struct {
+        int             tempertature;
+        int             humidity;
+    } sensor_data;
+
+
+// read sensor
+    printf("%s\n", "read sensor");
+    sensor_data.tempertature = 88;
+    sensor_data.humidity = 66;
+    printf("%s\n", "publish reading");
+
+    // initialise_wifi();
+    // printf("%s\n", "wifi initialized");
+
+// Initialize NVS
+    esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
@@ -238,18 +276,93 @@ void app_main(void)
 
     ESP_ERROR_CHECK(ret);
 
-    initialise_wifi();
-
     ret = xTaskCreate(&mqtt_client_thread,
-                      MQTT_CLIENT_THREAD_NAME,
+                      "sensor_publish",
                       MQTT_CLIENT_THREAD_STACK_WORDS,
-                      NULL,
+                      &sensor_data,
                       MQTT_CLIENT_THREAD_PRIO,
                       NULL);
 
     if (ret != pdPASS)  {
-        ESP_LOGE(TAG, "mqtt create client thread %s failed", MQTT_CLIENT_THREAD_NAME);
+        ESP_LOGE(TAG, "mqtt create  %s failed", MQTT_CLIENT_THREAD_NAME);
     }
+
 }
 
 
+void app_main(void)
+{
+    // Initialize NVS
+    esp_err_t                           ret = nvs_flash_init();
+    esp_err_t                           my_err_t;
+    esp_timer_handle_t                  s_timer;
+    uint64_t                            sensor_read_delay = SENSOR_READ_DELAY;
+
+    initialise_wifi();
+    printf("%s\n", "wifi initialized");
+
+    // define timer arguments
+    esp_timer_create_args_t timer_args = {
+        .callback = read_sensor_cb,
+        .arg = NULL,
+        .dispatch_method = ESP_TIMER_TASK,
+        .name = "read_sensor"
+    };
+
+    // create timer to perodically read and publish sensor data
+    my_err_t = esp_timer_create(&timer_args, &s_timer);
+    switch (my_err_t) {
+    case ESP_OK:
+        printf("%s\n", "timer created");
+        break;
+    case ESP_ERR_INVALID_ARG:
+        printf("%s\n", "the handle is invalid");
+        break;
+    case ESP_ERR_INVALID_STATE:
+        printf("%s\n", "the timer is already running");
+        break;
+    default :
+        printf("%s\n", "esp_timer_create returned an unknown return code");
+        break;
+    }
+
+    // start timer
+    printf("%s\n", "start timer");
+    my_err_t = esp_timer_start_periodic(s_timer, sensor_read_delay);
+    switch (my_err_t) {
+    case ESP_OK:
+        printf("%s\n", "timer running");
+        break;
+    case ESP_ERR_INVALID_ARG:
+        printf("%s\n", "the handle is invalid");
+        break;
+    case ESP_ERR_INVALID_STATE:
+        printf("%s\n", "the timer timer is already running");
+        break;
+    default :
+        printf("%s\n", "esp_timer_start_periodic returned an unknown return code");
+    }
+
+    // // Initialize NVS
+    // if (ret == ESP_ERR_NVS_NO_FREE_PAGES) {
+    //     ESP_ERROR_CHECK(nvs_flash_erase());
+    //     ret = nvs_flash_init();
+    // }
+
+    // ESP_ERROR_CHECK(ret);
+
+    // initialise_wifi();
+
+    // ret = xTaskCreate(&mqtt_client_thread,
+    //                   MQTT_CLIENT_THREAD_NAME,
+    //                   MQTT_CLIENT_THREAD_STACK_WORDS,
+    //                   NULL,
+    //                   MQTT_CLIENT_THREAD_PRIO,
+    //                   NULL);
+
+    // if (ret != pdPASS)  {
+    //     ESP_LOGE(TAG, "mqtt create client thread %s failed", MQTT_CLIENT_THREAD_NAME);
+    // }
+
+
+}

@@ -3,56 +3,65 @@
 	{
 		"selected_items":
 		[
+			[
+				"tem",
+				"temperature"
+			],
+			[
+				"ESP",
+				"ESP_LOGI"
+			],
+			[
+				"h",
+				"humidity"
+			],
+			[
+				"t",
+				"tempertature"
+			],
+			[
+				"sensor_",
+				"sensor_data"
+			],
+			[
+				"se",
+				"read_sensor_cb"
+			],
+			[
+				"esp",
+				"esp_err_t"
+			],
+			[
+				"p",
+				"printf\tprintf …"
+			],
+			[
+				"my",
+				"my_timer"
+			],
+			[
+				"my_",
+				"my_err_t"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "/media/Logs/bkup-log.log",
-			"settings":
-			{
-				"buffer_size": 1243,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/mam1/Git/HAS/ESP8266_RTOS_SDK/components/espos/platform/freertos/espos_queue.c",
-			"settings":
-			{
-				"buffer_size": 4947,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
 			"settings":
 			{
-				"buffer_size": 10499,
+				"buffer_size": 9668,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals/uart_echo/main/uart_echo_example_main.c",
+			"file": "/var/log/syslog",
 			"settings":
 			{
-				"buffer_size": 2006,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/mam1/Git/HAS/c/ESP8266/wifi/smart_config/main/smartconfig_main.c",
-			"settings":
-			{
-				"buffer_size": 3995,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/mam1/Git/HAS/c/ESP8266/mqtt/main/MQTTEcho.c",
-			"settings":
-			{
-				"buffer_size": 8073,
+				"buffer_size": 5045630,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -84,12 +93,28 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"About"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"for",
+				"Formatter: Minify With Clean CSS"
+			],
+			[
+				"pa",
+				"Package Control: Remove Package"
+			]
 		],
 		"width": 0.0
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 164.0,
 		"history":
 		[
 		]
@@ -107,29 +132,56 @@
 	[
 		"/home/mam1/Git/HAS",
 		"/home/mam1/Git/HAS/c",
-		"/home/mam1/Git/HAS/c/ESP8266",
-		"/home/mam1/Git/HAS/c/ESP8266/mqtt",
-		"/home/mam1/Git/HAS/c/ESP8266/nodecode",
-		"/home/mam1/Git/HAS/c/ESP8266/nodecode/main",
-		"/home/mam1/Git/HAS/c/i5-6600k",
-		"/home/mam1/Git/HAS/c/make",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals/gpio",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals/gpio/main",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals/uart_echo",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals/uart_echo/main",
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/tools"
+		"/home/mam1/Git/HAS/c/make"
 	],
 	"file_history":
 	[
-		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/protocols/https_wolfssl/main/https_wolfssl_example_main.c",
+		"/var/mail/mam1",
+		"/etc/resolv.conf",
+		"/etc/postfix/main.cf",
+		"/etc/environment",
 		"/media/Logs/bkup-log.log",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt/main/MQTTEcho.c",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt/build/include/sdkconfig.h",
+		"/home/mam1/Git/HAS/c/headers/HAStypedefs.h",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/log/include/esp_log.h",
+		"/home/mam1/Git/HAS/c/ESP8266/esp8266-toolchain/xtensa-lx106-elf/xtensa-lx106-elf/include/c++/5.2.0/system_error",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt/main/Kconfig.projbuild",
+		"/home/mam1/Git/HAS/c/ESP8266/nodecode/main/Kconfig.projbuild",
+		"/home/mam1/Git/HAS/c/ESP8266/nodecode/Makefile",
+		"/home/mam1/Git/HAS/c/ESP8266/nodecode/build/log/log.d",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/esp8266/include/esp_wifi.h",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/esp8266/source/esp_wifi.c",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/lwip/lwip/src/include/lwip/apps/mqtt.h",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/examples/protocols/mqtt/main/MQTTEcho.c",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/esp8266/include/esp_timer.h",
 		"/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt/Makefile",
+		"/home/mam1/Git/HAS/c/ESP8266/basic_test/main/user_main.c",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/freertos/include/freertos/semphr.h",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/examples/peripherals/hw_timer/main/hw_timer_example_main.c",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/esp8266/include/esp_event_loop.h",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/newlib/newlib/include/malloc.h",
+		"/home/mam1/Git/Mint-19/myscripts/run_backups",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/cjson/cJSON/tests/unity/src/unity.h",
+		"/home/mam1/Git/Mint-19/myscripts/bkup",
+		"/home/mam1/Git/HAS/c/ESP8266/wifi/smart_config/main/smartconfig_main.c",
+		"/home/mam1/Git/HAS/c/ESP8266/wifi/simple_wifi/main/simple_wifi.c",
+		"/home/mam1/Git/HAS/c/ESP8266/nodecode/main/wifi_thread.c",
+		"/home/mam1/Git/HAS/c/ESP8266/basic_test/Makefile",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/docs/en/api-guides/build-system.rst",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/docs/en/get-started/linux-setup.rst",
+		"/home/mam1/Git/ESP8266_RTOS_SDK/docs/en/api-guides/index.rst",
+		"/home/mam1/Git/HAS/c/ESP8266/nodecode/components/wifi/wifi.c",
+		"/home/mam1/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
+		"/home/mam1/.config/sublime-text-3/Packages/SublimeAStyleFormatter/Default (Linux).sublime-keymap",
+		"/home/mam1/Git/Mint-19/environment",
+		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/components/espos/platform/freertos/espos_queue.c",
+		"/etc/cron.daily/bkup",
+		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/protocols/https_wolfssl/main/https_wolfssl_example_main.c",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/components/freertos/freertos/event_groups.c",
 		"/home/mam1/Git/HAS/c/ESP8266/mqtt/README.md",
-		"/home/mam1/Git/HAS/c/ESP8266/mqtt/main/MQTTEcho.c",
 		"/home/mam1/Git/HAS/c/ESP8266/nodecode/sdkconfig.defaults",
 		"/home/mam1/Git/HAS/c/ESP8266/mqtt/sdkconfig.defaults",
 		"/home/mam1/Git/HAS/c/ESP8266/nodecode/sdkconfig",
@@ -141,22 +193,17 @@
 		"/usr/share/doc/mosquitto/examples/pwfile.example",
 		"/usr/share/doc/mosquitto/examples/pskfile.example",
 		"/usr/share/doc/mosquitto/examples/aclfile.example",
-		"/var/mail/mam1",
 		"/etc/mosquitto/conf.d/README",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/protocols/mqtt/README.md",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/protocols/mqtt/Makefile",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/components/log/include/esp_log.h",
-		"/home/mam1/Git/HAS/c/ESP8266/wifi/simple_wifi/main/simple_wifi.c",
-		"/home/mam1/Git/Mint-19/myscripts/bkup",
 		"/home/mam1/Git/HAS/c/ESP8266/wifi/simple_wifi/build/include/sdkconfig.h",
-		"/home/mam1/Git/HAS/c/ESP8266/nodecode/Makefile",
 		"/home/mam1/Git/HAS/c/ESP8266/wifi/simple_wifi/sdkconfig",
 		"/home/mam1/Git/HAS/c/ESP8266/second_try/second_try.sublime-project",
 		"/home/mam1/.config/sublime-text-3/Packages/User/ESP8266.sublime-build",
 		"/home/mam1/Git/HAS/c/ESP8266/second_try/main/user_main.c",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/make/project.mk",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/get-started/project_template/readme.txt",
-		"/home/mam1/Git/Mint-19/environment",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/docs/requirements.txt",
 		"/home/mam1/Git/HAS/c/ESP8266/first_try/sdkconfig",
 		"/home/mam1/Git/HAS/c/ESP8266/second_try/Makefile",
@@ -165,7 +212,6 @@
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/tools/kconfig_new/gen_kconfig_doc.py",
 		"/usr/sbin/update-info-dir",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/tools/ci/configure_ci_environment.sh",
-		"/etc/environment",
 		"/home/mam1/Git/HAS/c/ESP8266/first_try/main/first_try.sublime-project",
 		"/home/mam1/Git/HAS/c/ESP8266/first_try/main/user_main.c",
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/README.md",
@@ -173,7 +219,6 @@
 		"/etc/cron.d/backup-disks",
 		"/var/log/syslog",
 		"/etc/cron.d/anacron",
-		"/etc/cron.daily/bkup",
 		"/etc/cron.daily/aptitude",
 		"/etc/cron.daily/apport",
 		"/etc/cron.d/disk-backup",
@@ -216,6 +261,35 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"/h",
+			"/home/mam1/Git/HAS/c",
+			"/home/mam1/",
+			"~",
+			"/home/mam1",
+			"}",
+			"payloadlen",
+			"payload",
+			"MQTT_CLIENT_THREAD_NAME",
+			"wifi_init_config_t",
+			"const wifi_init_config_t *config)",
+			"MQTT_CLIENT_THREAD",
+			"mqtt_client_thread",
+			"timeout_us",
+			" MQTT_CLIENT_THREAD",
+			"ret ",
+			"timeout_us",
+			"esp_system",
+			"\n\t",
+			"timeout );\n",
+			"timeout );",
+			"sem",
+			"ESP_NUM_MAX",
+			"my_timer",
+			"esp_timer_cb_t",
+			"esp_timer_handle_t",
+			"initialise_wifi",
+			"smartconfig_example_task",
+			"sc_callback",
 			"sensor",
 			"HT22",
 			"WIFI_CONNECTED_BIT",
@@ -268,24 +342,54 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/media/Logs/bkup-log.log",
+					"file": "/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1243,
+						"buffer_size": 9668,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1859,
+								1859
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/var/log/syslog",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5045630,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5042224,
+								5042224
 							]
 						],
 						"settings":
@@ -293,160 +397,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/mam1/Git/HAS/ESP8266_RTOS_SDK/components/espos/platform/freertos/espos_queue.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4947,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10499,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8010,
-								8010
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4275.0,
+						"translation.y": 1150793.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/mam1/Git/HAS/ESP8266_RTOS_SDK/examples/peripherals/uart_echo/main/uart_echo_example_main.c",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 2006,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								583,
-								583
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/home/mam1/Git/HAS/c/ESP8266/wifi/smart_config/main/smartconfig_main.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3995,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1598,
-								1598
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 365.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/home/mam1/Git/HAS/c/ESP8266/mqtt/main/MQTTEcho.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8073,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2374,
-								2374
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 897.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -483,6 +437,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.astyle_error_message":
+	{
+		"height": 0.0
+	},
 	"output.exec":
 	{
 		"height": 381.0
@@ -537,7 +495,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 420.0,
+	"side_bar_width": 269.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
