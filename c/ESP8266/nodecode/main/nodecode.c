@@ -1,5 +1,5 @@
 /*******************************************************************************
- * nodecode  ver 0.0
+ * nodecode  ver 0.1
  *
  * mam -1/21/2019
  *
@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "nodecode.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "esp_event_loop.h"
@@ -37,14 +38,15 @@ const int CONNECTED_BIT = BIT0;
 #define MQTT_CLIENT_THREAD_STACK_WORDS  4096
 #define MQTT_CLIENT_THREAD_PRIO         8
 
+#define MQTT_PUBLISH_TOPIC              "258Thomas/temp/location"
+#define MQTT_SUBSCRIBE_TOPIC            "258Thomas/temp/location"
+
 #define SENSOR_READ_THREAD_NAME         "sensor_read"
 #define SENSOR_READ_THREAD_STACK_WORDS  4096
 #define SENSOR_READ_THREAD_PRIO         8
 #define SENSOR_READ_DELAY               10000000
 
 static const char *TAG = "nodecode";
-
-
 
 static esp_err_t event_handler(void *ctx, system_event_t *event)
 {
@@ -244,8 +246,8 @@ static void read_sensor_cb(void *pvParameters)
     sensor_data.humidity = 66;
     printf("%s\n", "publish reading");
 
-    // initialise_wifi();
-    // printf("%s\n", "wifi initialized");
+    initialise_wifi();
+    printf("%s\n", "wifi initialized");
 
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
@@ -269,6 +271,22 @@ static void read_sensor_cb(void *pvParameters)
         ESP_LOGE(TAG, "mqtt create  %s failed", MQTT_CLIENT_THREAD_NAME);
     }
 
+    // disconnect from wifi
+    ret = esp_wifi_disconnect();
+    switch(ret){
+        case ESP_OK:
+            printf("%s\n", "sucessful disconnect");
+            break;
+        case ESP_ERR_WIFI_NOT_INIT:
+            printf("%s\n", "WiFi was not initialized by esp_wifi_init");
+            break;
+        case ESP_ERR_WIFI_NOT_STARTED:
+            printf("%s\n", "WiFi was not started by esp_wifi_start");
+            break;
+        case ESP_FAIL:
+            printf("%s\n", "other WiFi internal errors");
+            break;
+    }
 }
 
 
@@ -283,11 +301,11 @@ void app_main(void)
 
     printf("\nSDK version:%s\n", esp_get_idf_version());
     printf("%s\n", "HAS version 0.0");
-    printf("%s\n", "nodecode  ver 0.1\n");
+    printf("nodecode  version %s\n", _VERSION);
 
-    initialise_wifi();
-    printf("%s\n", "wifi initialized");
-    ESP_LOGI(TAG, "wifi intitialzed");
+    // initialise_wifi();
+    // printf("%s\n", "wifi initialized");
+    // ESP_LOGI(TAG, "wifi intitialzed");
 
     // define timer arguments
     esp_timer_create_args_t timer_args = {

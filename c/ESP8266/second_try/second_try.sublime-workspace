@@ -48,21 +48,11 @@
 	"buffers":
 	[
 		{
-			"file": "/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
+			"file": "/home/mam1/Videos/0-new/Hawaii.Five-0.2010.S09E11.720p.WEB.H264-AMCON[rarbg]/hawaii.five-0.2010.s09e11.720p.web.h264-amcon.nfo",
 			"settings":
 			{
-				"buffer_size": 9668,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/log/syslog",
-			"settings":
-			{
-				"buffer_size": 5045630,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"buffer_size": 56,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -132,16 +122,27 @@
 	[
 		"/home/mam1/Git/HAS",
 		"/home/mam1/Git/HAS/c",
+		"/home/mam1/Git/HAS/c/ESP8266",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt/main",
 		"/home/mam1/Git/HAS/c/make"
 	],
 	"file_history":
 	[
+		"/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
 		"/var/mail/mam1",
+		"/var/log/syslog",
+		"/media/Logs/bkup-log.log",
+		"/home/mam1/Git/HAS/c/ESP8266/mqtt/main/MQTTEcho.c",
+		"/usr/share/X11/xorg.conf.d/95-mouse-acceleration.conf",
+		"/usr/share/X11/xorg.conf.d/50-mouse-acceleration.conf",
+		"/usr/share/X11/xorg.conf.d/70-wacom.conf",
+		"/media/mam1/rootfs/bbb-uEnv.txt",
+		"/media/mam1/rootfs/etc/network/interfaces",
+		"/media/mam1/BEAGLEBONE/README.md",
 		"/etc/resolv.conf",
 		"/etc/postfix/main.cf",
 		"/etc/environment",
-		"/media/Logs/bkup-log.log",
-		"/home/mam1/Git/HAS/c/ESP8266/mqtt/main/MQTTEcho.c",
 		"/home/mam1/Git/HAS/c/ESP8266/mqtt/build/include/sdkconfig.h",
 		"/home/mam1/Git/HAS/c/headers/HAStypedefs.h",
 		"/home/mam1/Git/ESP8266_RTOS_SDK/components/log/include/esp_log.h",
@@ -155,7 +156,6 @@
 		"/home/mam1/Git/ESP8266_RTOS_SDK/components/lwip/lwip/src/include/lwip/apps/mqtt.h",
 		"/home/mam1/Git/ESP8266_RTOS_SDK/examples/protocols/mqtt/main/MQTTEcho.c",
 		"/home/mam1/Git/ESP8266_RTOS_SDK/components/esp8266/include/esp_timer.h",
-		"/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
 		"/home/mam1/Git/HAS/c/ESP8266/mqtt/Makefile",
 		"/home/mam1/Git/HAS/c/ESP8266/basic_test/main/user_main.c",
 		"/home/mam1/Git/ESP8266_RTOS_SDK/components/freertos/include/freertos/semphr.h",
@@ -217,7 +217,6 @@
 		"/home/mam1/Git/HAS/ESP8266_RTOS_SDK/README.md",
 		"/media/Logs/vvvvvvvvvvvvvvvvvvvvvvv",
 		"/etc/cron.d/backup-disks",
-		"/var/log/syslog",
 		"/etc/cron.d/anacron",
 		"/etc/cron.daily/aptitude",
 		"/etc/cron.daily/apport",
@@ -261,6 +260,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ESP_LOGI",
+			"MQTT_CLIENT_THREAD",
+			"mqtt_client_thread",
 			"/h",
 			"/home/mam1/Git/HAS/c",
 			"/home/mam1/",
@@ -342,54 +344,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/mam1/Git/HAS/c/ESP8266/nodecode/main/nodecode.c",
+					"file": "/home/mam1/Videos/0-new/Hawaii.Five-0.2010.S09E11.720p.WEB.H264-AMCON[rarbg]/hawaii.five-0.2010.s09e11.720p.web.h264-amcon.nfo",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9668,
+						"buffer_size": 56,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1859,
-								1859
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 798.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/var/log/syslog",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5045630,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5042224,
-								5042224
+								0,
+								0
 							]
 						],
 						"settings":
@@ -397,7 +369,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1150793.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
