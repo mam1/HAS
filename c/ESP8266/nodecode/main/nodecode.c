@@ -1,9 +1,7 @@
 /*******************************************************************************
-<<<<<<< HEAD
- * nodecode  ver 0.0
-=======
+
  * nodecode  ver 0.1
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
+
  *
  * mam -1/21/2019
  *
@@ -13,10 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
-<<<<<<< HEAD
-=======
 #include "nodecode.h"
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "esp_event_loop.h"
@@ -45,28 +40,19 @@ const int CONNECTED_BIT = BIT0;
 #define MQTT_CLIENT_THREAD_STACK_WORDS  4096
 #define MQTT_CLIENT_THREAD_PRIO         8
 
-<<<<<<< HEAD
-=======
 #define MQTT_PUBLISH_TOPIC              "258Thomas/temp/location"
 #define MQTT_SUBSCRIBE_TOPIC            "258Thomas/temp/location"
-
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
 #define SENSOR_READ_THREAD_NAME         "sensor_read"
 #define SENSOR_READ_THREAD_STACK_WORDS  4096
 #define SENSOR_READ_THREAD_PRIO         8
 #define SENSOR_READ_DELAY               10000000
-<<<<<<< HEAD
 
 #define WIFI_SSID                       "FrontierHSI"
 #define WIFI_PASSWORD                   ""
 #define MQTT_BROKER                     "192.168.254.221"
 #define MQTT_PORT                       1883
-=======
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
 
 static const char *TAG = "nodecode";
-
-
 
 static esp_err_t event_handler(void *ctx, system_event_t *event)
 {
@@ -103,13 +89,8 @@ static void initialise_wifi(void)
     ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
     wifi_config_t wifi_config = {
         .sta = {
-<<<<<<< HEAD
             .ssid = WIFI_SSID,
             .password = WIFI_PASSWORD,
-=======
-            .ssid = CONFIG_WIFI_SSID,
-            .password = CONFIG_WIFI_PASSWORD,
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
         },
     };
     ESP_LOGI(TAG, "Setting WiFi configuration SSID %s...", wifi_config.sta.ssid);
@@ -133,7 +114,7 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
     char clientID[32] = {0};
 
     ESP_LOGI(TAG, "ssid:%s passwd:%s sub:%s qos:%u pub:%s qos:%u pubinterval:%u payloadsize:%u",
-             CONFIG_WIFI_SSID, CONFIG_WIFI_PASSWORD, CONFIG_MQTT_SUB_TOPIC,
+             WIFI_SSID, WIFI_PASSWORD, MQTT_SUBSCRIBE_TOPIC,
              CONFIG_DEFAULT_MQTT_SUB_QOS, CONFIG_MQTT_PUB_TOPIC, CONFIG_DEFAULT_MQTT_PUB_QOS,
              CONFIG_MQTT_PUBLISH_INTERVAL, CONFIG_MQTT_PAYLOAD_BUFFER);
 
@@ -172,7 +153,6 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
 
     ESP_LOGI(TAG, "wait wifi connect...");
     xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
-<<<<<<< HEAD
 
     if ((rc = NetworkConnect(&network, MQTT_BROKER, MQTT_PORT)) != 0)
     {
@@ -200,35 +180,7 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
         network.disconnect(&network);
     }
 
-=======
 
-    if ((rc = NetworkConnect(&network, CONFIG_MQTT_BROKER, CONFIG_MQTT_PORT)) != 0)
-    {
-        ESP_LOGE(TAG, "Return code from network connect is %d", rc);
-
-    }
-
-    connectData.MQTTVersion = CONFIG_DEFAULT_MQTT_VERSION;
-
-    sprintf(clientID, "%s_%u", CONFIG_MQTT_CLIENT_ID, esp_random());
-
-    connectData.clientID.cstring = clientID;
-    connectData.keepAliveInterval = CONFIG_MQTT_KEEP_ALIVE;
-
-    connectData.username.cstring = CONFIG_MQTT_USERNAME;
-    connectData.password.cstring = CONFIG_MQTT_PASSWORD;
-
-    connectData.cleansession = CONFIG_DEFAULT_MQTT_SESSION;
-
-    ESP_LOGI(TAG, "MQTT Connecting");
-
-    if ((rc = MQTTConnect(&client, &connectData)) != 0)
-    {
-        ESP_LOGE(TAG, "Return code from MQTT connect is %d", rc);
-        network.disconnect(&network);
-    }
-
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
     ESP_LOGI(TAG, "MQTT Connected");
 
 #if defined(MQTT_TASK)
@@ -244,15 +196,9 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
 
 #endif
 
-<<<<<<< HEAD
 
     MQTTMessage message;
 
-=======
-
-    MQTTMessage message;
-
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
     message.qos = CONFIG_DEFAULT_MQTT_PUB_QOS;
     message.retained = 0;
     message.payload = payload;
@@ -306,17 +252,12 @@ static void read_sensor_cb(void *pvParameters)
     sensor_data.temperature = 88;
     sensor_data.humidity = 66;
     printf("%s\n", "publish reading");
-<<<<<<< HEAD
+
 
     // initialise_wifi();
     // printf("%s\n", "wifi initialized");
 
-=======
 
-    initialise_wifi();
-    printf("%s\n", "wifi initialized");
-
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES)
@@ -339,25 +280,24 @@ static void read_sensor_cb(void *pvParameters)
         ESP_LOGE(TAG, "mqtt create  %s failed", MQTT_CLIENT_THREAD_NAME);
     }
 
-<<<<<<< HEAD
-=======
+
     // disconnect from wifi
-    ret = esp_wifi_disconnect();
-    switch(ret){
-        case ESP_OK:
-            printf("%s\n", "sucessful disconnect");
-            break;
-        case ESP_ERR_WIFI_NOT_INIT:
-            printf("%s\n", "WiFi was not initialized by esp_wifi_init");
-            break;
-        case ESP_ERR_WIFI_NOT_STARTED:
-            printf("%s\n", "WiFi was not started by esp_wifi_start");
-            break;
-        case ESP_FAIL:
-            printf("%s\n", "other WiFi internal errors");
-            break;
-    }
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
+    // ret = esp_wifi_disconnect();
+    // switch(ret){
+    //     case ESP_OK:
+    //         printf("%s\n", "sucessful disconnect");
+    //         break;
+    //     case ESP_ERR_WIFI_NOT_INIT:
+    //         printf("%s\n", "WiFi was not initialized by esp_wifi_init");
+    //         break;
+    //     case ESP_ERR_WIFI_NOT_STARTED:
+    //         printf("%s\n", "WiFi was not started by esp_wifi_start");
+    //         break;
+    //     case ESP_FAIL:
+    //         printf("%s\n", "other WiFi internal errors");
+    //         break;
+    // }
+
 }
 
 
@@ -372,19 +312,15 @@ void app_main(void)
 
     printf("\nSDK version:%s\n", esp_get_idf_version());
     printf("%s\n", "HAS version 0.0");
-<<<<<<< HEAD
-    printf("%s\n", "nodecode  ver 0.0\n");
-
     initialise_wifi();
     printf("%s\n", "wifi initialized");
     ESP_LOGI(TAG, "logit wifi intitialzed");
-=======
     printf("nodecode  version %s\n", _VERSION);
 
     // initialise_wifi();
     // printf("%s\n", "wifi initialized");
     // ESP_LOGI(TAG, "wifi intitialzed");
->>>>>>> 74b87da5357972f561806462d6e0eb5a84c14a26
+
 
     // define timer arguments
     esp_timer_create_args_t timer_args = {
