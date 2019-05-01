@@ -113,6 +113,7 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
     int rc = 0;
     char clientID[32] = {0};
 
+    printf("publish thread active\n");
     ESP_LOGI(TAG, "ssid:%s passwd:%s sub:%s qos:%u pub:%s qos:%u pubinterval:%u payloadsize:%u",
              WIFI_SSID, WIFI_PASSWORD, MQTT_SUBSCRIBE_TOPIC,
              CONFIG_DEFAULT_MQTT_SUB_QOS, CONFIG_MQTT_PUB_TOPIC, CONFIG_DEFAULT_MQTT_PUB_QOS,
@@ -139,6 +140,7 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
         ESP_LOGE(TAG, "mqtt init err");
         vTaskDelete(NULL);
     }
+    printf ("network initialized\n");
 
     payload = malloc(CONFIG_MQTT_PAYLOAD_BUFFER);
 
@@ -151,8 +153,18 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
         memset(payload, 0x0, CONFIG_MQTT_PAYLOAD_BUFFER);
     }
 
+    printf("%s\n","payload buffer initialized\n" );
+
+
+    initialise_wifi();
+    printf("%s\n", "wifi initialized");
+    ESP_LOGI(TAG, "logit wifi intitialzed");
+
+
     ESP_LOGI(TAG, "wait wifi connect...");
-    xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
+    // xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
+
+    printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 
     if ((rc = NetworkConnect(&network, MQTT_BROKER, MQTT_PORT)) != 0)
     {
@@ -160,6 +172,7 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
 
     }
 
+    ESP_LOGI(TAG, "loading connectData...");
     connectData.MQTTVersion = CONFIG_DEFAULT_MQTT_VERSION;
 
     sprintf(clientID, "%s_%u", CONFIG_MQTT_CLIENT_ID, esp_random());
@@ -205,6 +218,8 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
     sprintf(payload, "temperature %d", (*pvParameters).temperature);
             message.payloadlen = strlen(payload);
 
+    printf("###############payload buffer >%s<\n", payload);
+
     if ((rc = MQTTPublish(&client, "258thomas/house/tempertature", &message)) != 0)
     {
         ESP_LOGE(TAG, "Return code from MQTT publish is %d", rc);
@@ -248,10 +263,10 @@ static void read_sensor_cb(void *pvParameters)
 
 
     // read sensor
-    printf("%s\n", "read sensor");
+    printf("%s\n", "************** read sensor");
     sensor_data.temperature = 88;
     sensor_data.humidity = 66;
-    printf("%s\n", "publish reading");
+    printf("%s\n", "************** publish reading");
 
 
     // initialise_wifi();
@@ -281,22 +296,22 @@ static void read_sensor_cb(void *pvParameters)
     }
 
 
-    // disconnect from wifi
-    // ret = esp_wifi_disconnect();
-    // switch(ret){
-    //     case ESP_OK:
-    //         printf("%s\n", "sucessful disconnect");
-    //         break;
-    //     case ESP_ERR_WIFI_NOT_INIT:
-    //         printf("%s\n", "WiFi was not initialized by esp_wifi_init");
-    //         break;
-    //     case ESP_ERR_WIFI_NOT_STARTED:
-    //         printf("%s\n", "WiFi was not started by esp_wifi_start");
-    //         break;
-    //     case ESP_FAIL:
-    //         printf("%s\n", "other WiFi internal errors");
-    //         break;
-    // }
+//    disconnect from wifi
+    ret = esp_wifi_disconnect();
+    switch(ret){
+        case ESP_OK:
+            printf("%s\n", "sucessful disconnect");
+            break;
+        case ESP_ERR_WIFI_NOT_INIT:
+            printf("%s\n", "WiFi was not initialized by esp_wifi_init");
+            break;
+        case ESP_ERR_WIFI_NOT_STARTED:
+            printf("%s\n", "WiFi was not started by esp_wifi_start");
+            break;
+        case ESP_FAIL:
+            printf("%s\n", "other WiFi internal errors");
+            break;
+    }
 
 }
 
@@ -312,15 +327,8 @@ void app_main(void)
 
     printf("\nSDK version:%s\n", esp_get_idf_version());
     printf("%s\n", "HAS version 0.0");
-    initialise_wifi();
-    printf("%s\n", "wifi initialized");
-    ESP_LOGI(TAG, "logit wifi intitialzed");
+
     printf("nodecode  version %s\n", _VERSION);
-
-    // initialise_wifi();
-    // printf("%s\n", "wifi initialized");
-    // ESP_LOGI(TAG, "wifi intitialzed");
-
 
     // define timer arguments
     esp_timer_create_args_t timer_args = {
