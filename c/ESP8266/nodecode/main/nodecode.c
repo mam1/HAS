@@ -37,15 +37,15 @@ static EventGroupHandle_t wifi_event_group;
 const int CONNECTED_BIT = BIT0;
 
 #define MQTT_CLIENT_THREAD_NAME         "mqtt_client_thread"
-#define MQTT_CLIENT_THREAD_STACK_WORDS  4096
+#define MQTT_CLIENT_THREAD_STACK_WORDS  8096
 #define MQTT_CLIENT_THREAD_PRIO         8
 
 #define MQTT_PUBLISH_TOPIC              "258Thomas/temp/location"
 #define MQTT_SUBSCRIBE_TOPIC            "258Thomas/temp/location"
 #define SENSOR_READ_THREAD_NAME         "sensor_read"
-#define SENSOR_READ_THREAD_STACK_WORDS  4096
+#define SENSOR_READ_THREAD_STACK_WORDS  8096
 #define SENSOR_READ_THREAD_PRIO         8
-#define SENSOR_READ_DELAY               10000000
+#define SENSOR_READ_DELAY               10900000
 
 #define WIFI_SSID                       "FrontierHSI"
 #define WIFI_PASSWORD                   ""
@@ -114,6 +114,11 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
     char clientID[32] = {0};
 
     printf("publish thread active\n");
+    initialise_wifi();
+    printf("%s\n", "wifi initialized");
+    ESP_LOGI(TAG, "wifi intitialzed");
+    xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
+
     ESP_LOGI(TAG, "ssid:%s passwd:%s sub:%s qos:%u pub:%s qos:%u pubinterval:%u payloadsize:%u",
              WIFI_SSID, WIFI_PASSWORD, MQTT_SUBSCRIBE_TOPIC,
              CONFIG_DEFAULT_MQTT_SUB_QOS, CONFIG_MQTT_PUB_TOPIC, CONFIG_DEFAULT_MQTT_PUB_QOS,
@@ -132,6 +137,8 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
     ESP_LOGI(TAG, "temp - %d, humid - %d", (*pvParameters).temperature,(*pvParameters).humidity);
 
     MQTTPacket_connectData                  connectData = MQTTPacket_connectData_initializer;
+
+
 
     NetworkInit(&network);
 
@@ -156,13 +163,8 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
     printf("%s\n","payload buffer initialized\n" );
 
 
-    initialise_wifi();
-    printf("%s\n", "wifi initialized");
-    ESP_LOGI(TAG, "logit wifi intitialzed");
-
-
     ESP_LOGI(TAG, "wait wifi connect...");
-    // xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
+    xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
 
     printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 
@@ -251,6 +253,26 @@ static void mqtt_client_thread(_SENSOR_DATA *pvParameters)
         // break;
     }
 
+
+//    disconnect from wifi
+    ESP_ERROR_CHECK( esp_wifi_disconnect() );
+    // char    ret[25];
+    // ret = esp_wifi_disconnect();
+    // switch(ret){
+    //     case ESP_OK:
+    //         printf("%s\n", "sucessful disconnect");
+    //         break;
+    //     case ESP_ERR_WIFI_NOT_INIT:
+    //         printf("%s\n", "WiFi was not initialized by esp_wifi_init");
+    //         break;
+    //     case ESP_ERR_WIFI_NOT_STARTED:
+    //         printf("%s\n", "WiFi was not started by esp_wifi_start");
+    //         break;
+    //     case ESP_FAIL:
+    //         printf("%s\n", "other WiFi internal errors");
+    //         break;
+    // }
+
     network.disconnect(&network);
     ESP_LOGW(TAG, "mqtt_client_thread going to be deleted");
     vTaskDelete(NULL);
@@ -261,17 +283,12 @@ static void read_sensor_cb(void *pvParameters)
 {
     _SENSOR_DATA            sensor_data;
 
-
     // read sensor
     printf("%s\n", "************** read sensor");
     sensor_data.temperature = 88;
     sensor_data.humidity = 66;
+
     printf("%s\n", "************** publish reading");
-
-
-    // initialise_wifi();
-    // printf("%s\n", "wifi initialized");
-
 
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
@@ -282,6 +299,8 @@ static void read_sensor_cb(void *pvParameters)
     }
 
     ESP_ERROR_CHECK(ret);
+
+    printf("%s\n","\n************** launching new task" );
 
     ret = xTaskCreate(&mqtt_client_thread,
                       "sensor_publish",
@@ -295,23 +314,6 @@ static void read_sensor_cb(void *pvParameters)
         ESP_LOGE(TAG, "mqtt create  %s failed", MQTT_CLIENT_THREAD_NAME);
     }
 
-
-//    disconnect from wifi
-    ret = esp_wifi_disconnect();
-    switch(ret){
-        case ESP_OK:
-            printf("%s\n", "sucessful disconnect");
-            break;
-        case ESP_ERR_WIFI_NOT_INIT:
-            printf("%s\n", "WiFi was not initialized by esp_wifi_init");
-            break;
-        case ESP_ERR_WIFI_NOT_STARTED:
-            printf("%s\n", "WiFi was not started by esp_wifi_start");
-            break;
-        case ESP_FAIL:
-            printf("%s\n", "other WiFi internal errors");
-            break;
-    }
 
 }
 
@@ -327,48 +329,51 @@ void app_main(void)
 
     printf("\nSDK version:%s\n", esp_get_idf_version());
     printf("%s\n", "HAS version 0.0");
-
     printf("nodecode  version %s\n", _VERSION);
 
-    // define timer arguments
-    esp_timer_create_args_t timer_args = {
-        .callback = read_sensor_cb,
-        .arg = NULL,
-        .dispatch_method = ESP_TIMER_TASK,
-        .name = "read_sensor"
-    };
+    // // define timer arguments
+    // esp_timer_create_args_t timer_args = {
+    //     .callback = read_sensor_cb,
+    //     .arg = NULL,
+    //     .dispatch_method = ESP_TIMER_TASK,
+    //     .name = "read_sensor"
+    // };
 
-    // create timer to perodically read and publish sensor data
-    my_err_t = esp_timer_create(&timer_args, &s_timer);
-    switch (my_err_t) {
-    case ESP_OK:
-        printf("%s\n", "timer created");
-        break;
-    case ESP_ERR_INVALID_ARG:
-        printf("%s\n", "the handle is invalid");
-        break;
-    case ESP_ERR_INVALID_STATE:
-        printf("%s\n", "the timer is already running");
-        break;
-    default :
-        printf("%s\n", "esp_timer_create returned an unknown return code");
-        break;
-    }
+    // // create timer to perodically read and publish sensor data
+    // my_err_t = esp_timer_create(&timer_args, &s_timer);
+    // switch (my_err_t) {
+    // case ESP_OK:
+    //     printf("%s\n", "timer created");
+    //     break;
+    // case ESP_ERR_INVALID_ARG:
+    //     printf("%s\n", "the handle is invalid");
+    //     break;
+    // case ESP_ERR_INVALID_STATE:
+    //     printf("%s\n", "the timer is already running");
+    //     break;
+    // default :
+    //     printf("%s\n", "esp_timer_create returned an unknown return code");
+    //     break;
+    // }
 
-    // start timer
-    printf("%s\n", "start timer");
-    my_err_t = esp_timer_start_periodic(s_timer, sensor_read_delay);
-    switch (my_err_t) {
-    case ESP_OK:
-        printf("%s\n", "timer running");
-        break;
-    case ESP_ERR_INVALID_ARG:
-        printf("%s\n", "the handle is invalid");
-        break;
-    case ESP_ERR_INVALID_STATE:
-        printf("%s\n", "the timer timer is already running");
-        break;
-    default :
-        printf("%s\n", "esp_timer_start_periodic returned an unknown return code");
-    }
+    // // start timer
+    // printf("%s\n", "start timer");
+    // my_err_t = esp_timer_start_periodic(s_timer, sensor_read_delay);
+    // switch (my_err_t) {
+    // case ESP_OK:
+    //     printf("%s\n", "timer running");
+    //     break;
+    // case ESP_ERR_INVALID_ARG:
+    //     printf("%s\n", "the handle is invalid");
+    //     break;
+    // case ESP_ERR_INVALID_STATE:
+    //     printf("%s\n", "the timer timer is already running");
+    //     break;
+    // default :
+    //     printf("%s\n", "esp_timer_start_periodic returned an unknown return code");
+    // }
+
+
+    _SENSOR_DATA            sensor_data;
+    read_sensor_cb(&sensor_data);
 }
