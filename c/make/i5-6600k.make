@@ -6,10 +6,11 @@
 # set directories
 system_BINARIES := ~/Git/HAS/bin
 code_DIRECTORY := $(working_DIRECTORY)
-program_INCLUDE_DIRS := /home/mam1/Git/HAS/c/headers/  #/usr/include/linux/
-program_LIBRARY_DIRS := $~/Git/HAS/c/lib
-program_LIBRARIES := hellow
+program_INCLUDE_DIRS := /home/mam1/Git/HAS/c/headers/  /media/Abyss/Applications/Eclipse-Paho-MQTT-C-1.3.0-Linux/include
+program_LIBRARY_DIRS := /media/Abyss/Applications/Eclipse-Paho-MQTT-C-1.3.0-Linux/lib/
 
+# $~/Git/HAS/c/lib /media/Abyss/Applications/Eclipse-Paho-MQTT-C-1.3.0-Linux/lib
+program_LIBRARIES := /media/Abyss/Applications/Eclipse-Paho-MQTT-C-1.3.0-Linux/lib/libpaho-mqtt3cs.so.1.3.0
 # scan working directory
 program_C_SRCS := $(program_NAME).c
 program_CXX_SRCS :=  $(program_NAME).cpp
@@ -19,8 +20,8 @@ program_OBJS :=  $(program_C_OBJS) $(program_CXX_OBJS)
 
 # set parameters
 CPPFLAGS += $(foreach includedir,$(program_INCLUDE_DIRS),-I$(includedir))
-# LDFLAGS += $(foreach librarydir,$(program_LIBRARY_DIRS),-L$(librarydir))
-# LDFLAGS += $(foreach library,$(program_LIBRARIES),-l$(library))
+LDFLAGS += $(foreach librarydir,$(program_LIBRARY_DIRS),-L$(librarydir))
+LDFLAGS += $(foreach library,$(program_LIBRARIES),-l$(library))
 CFLAGS  += -Wall
 CXXFLAGS += $(CFLAGS)
 LDFLAGS += $(CFLAGS) -fno-exceptions      
@@ -39,7 +40,8 @@ OBJCOPY := $objcopy
 all: $(program_NAME)
 
 $(program_NAME): $(program_OBJS)
-	gcc hellow.c -o $(system_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+	gcc $(program_NAME).c -o $(system_BINARIES)/$(program_NAME) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) 
+
 	@echo "\n>>>>> build of $(program_NAME).c completed\n"
 
 # clean up
